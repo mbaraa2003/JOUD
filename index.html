@@ -501,6 +501,19 @@
             </div>
         </div>
 
+        <div id="next-date-section" style="margin-top: 60px; text-align: center; padding: 10px; position: relative;">
+            <h2 class="capsule-header" style="color: var(--primary-pink);">موعد ديتنا القادم ❤️</h2>
+            <div class="capsule-container" style="max-width: 500px; padding: 25px;">
+                <p style="color:#aaa; font-size:0.9rem; margin-bottom:20px;">ينتهي في 01.05.2026</p>
+                <div class="capsule-timer" style="grid-template-columns: repeat(4, 1fr); margin-bottom: 0;">
+                    <div class="capsule-time-box"><span id="nd-days" class="capsule-val">0</span><span class="capsule-label">يوم</span></div>
+                    <div class="capsule-time-box"><span id="nd-hours" class="capsule-val">0</span><span class="capsule-label">ساعة</span></div>
+                    <div class="capsule-time-box"><span id="nd-minutes" class="capsule-val">0</span><span class="capsule-label">دقيقة</span></div>
+                    <div class="capsule-time-box"><span id="nd-seconds" class="capsule-val">0</span><span class="capsule-label">ثانية</span></div>
+                </div>
+            </div>
+        </div>
+
         <div id="time-capsule-section">
             <h2 class="capsule-header">رسالة للمستقبل ⏳</h2>
             <div class="capsule-container" id="capsule-box">
@@ -1012,6 +1025,33 @@
         }
         setInterval(updateCapsuleTimer, 1000);
         updateCapsuleTimer();
+
+        // --- 12. موعد ديتنا القادم ---
+        function updateNextDateTimer() {
+            const now = new Date();
+            const target = new Date("May 01, 2026 00:00:00");
+            const diff = target - now;
+
+            if (diff <= 0) {
+                document.getElementById('nd-days').innerText = "0";
+                document.getElementById('nd-hours').innerText = "0";
+                document.getElementById('nd-minutes').innerText = "0";
+                document.getElementById('nd-seconds').innerText = "0";
+                return;
+            }
+
+            const seconds = Math.floor((diff / 1000) % 60);
+            const minutes = Math.floor((diff / 1000 / 60) % 60);
+            const hours = Math.floor((diff / (1000 * 60 * 60)) % 24);
+            const days = Math.floor(diff / (1000 * 60 * 60 * 24));
+
+            document.getElementById('nd-days').innerText = days;
+            document.getElementById('nd-hours').innerText = hours;
+            document.getElementById('nd-minutes').innerText = minutes;
+            document.getElementById('nd-seconds').innerText = seconds;
+        }
+        setInterval(updateNextDateTimer, 1000);
+        updateNextDateTimer();
 
     </script>
 </body>
